@@ -20,9 +20,9 @@ class FriendList : AppCompatActivity() {
 
         initUsers()
         val layoutManager = LinearLayoutManager(this)
-        recycleView.layoutManager = layoutManager
-        val adapter = UserAdapter(userList,this)
-        recycleView.adapter = adapter
+        friendRecycleView.layoutManager = layoutManager
+        val adapter = UserAdapter(userList)
+        friendRecycleView.adapter = adapter
 
         adapter.setMyOnClickListener(object : UserAdapter.MyOnClickListener{
             override fun clickListener(position: Int) {
@@ -33,6 +33,7 @@ class FriendList : AppCompatActivity() {
             }
         })
     }
+
 
     private fun initUsers() {
         userList.add(User("鹏","19215120435", R.drawable.img_1))

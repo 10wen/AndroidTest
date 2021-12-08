@@ -12,17 +12,17 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 
-class UserAdapter() :
+class UserAdapter(private val userList: List<User>) :
     RecyclerView.Adapter<UserAdapter.ViewHolder>(){
 
-    private var userList: List<User>? = null
-    private var context: Context? = null
     private var itemClick: MyOnClickListener? = null
+//    private var userList: List<User>? = null
+//    private var context: Context? = null
 
-    constructor(userList: List<User>, context: Context) : this() {
-        this.userList = userList
-        this.context = context
-    }
+//    constructor(userList: List<User>, context: Context) : this() {
+//        this.userList = userList
+//        this.context = context
+//    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val userImage: ImageView = view.findViewById(R.id.userImg)
@@ -67,19 +67,17 @@ class UserAdapter() :
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val user = userList?.get(position)
-        if (user != null) {
-            holder.userImage.setImageResource(user.ImgId)
-            holder.userName.text = user.Name
-            holder.userPhone.text = user.Phone
-        }
+        val user = userList[position]
+        holder.userImage.setImageResource(user.ImgId)
+        holder.userName.text = user.Name
+        holder.userPhone.text = user.Phone
 
         holder.itemView.setOnClickListener{
             itemClick?.clickListener(position)
         }
     }
 
-    override fun getItemCount() = userList!!.size
+    override fun getItemCount() = userList.size
 
 //    提供set方法
     fun setMyOnClickListener(itemClick: MyOnClickListener) {
