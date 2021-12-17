@@ -23,23 +23,41 @@ class Register : AppCompatActivity() {
             val user_pwd2 = userPwd2.text.toString()
 
             if (checkRegister(user_Id,user_Phone,user_pwd,user_pwd2)) {
-                val intent = Intent(this, BindInfo::class.java)
-                startActivity(intent)
+                //向数据库表userTable插入数据
+                if (insertUserData(user_Id,user_Phone,user_pwd)){
+                    val intent = Intent(this, BindInfo::class.java)
+                    intent.putExtra("userPhone", user_Phone)
+                    startActivity(intent)
+                }
             }else{
                 if (!check.checkUserId(user_Id)){
-                    userId.setError("以字母开头，长度在6~16之间，只能包含字母、数字和下划线")
+                    userId.error = "以字母开头，长度在6~16之间，只能包含字母、数字和下划线"
                 }
                 if (!check.checkPhoneNum(user_Phone)){
-                    userPhone.setError("请输入正确的电话号码")
+                    userPhone.error = "请输入正确的电话号码"
                 }
                 if (!check.checkPassword(user_pwd)){
-                    userPwd.setError("以字母开头，长度在6~16之间，只能包含字母、数字和下划线")
+                    userPwd.error = "以字母开头，长度在6~16之间，只能包含字母、数字和下划线"
                 }
                 if (user_pwd != user_pwd2) {
-                    userPwd2.setError("前后密码不一致")
+                    userPwd2.error = "前后密码不一致"
                     Toast.makeText(this,"密码不一致！",Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    //向数据库表userTable插入数据
+    private fun insertUserData(userId: String, userPhone: String, userPwd: String): Boolean {
+        val insert = ServerForUserDB(this)
+        val code = insert.checkUser(userPhone,userPwd)
+        return if  (code in listOf(1,2)){
+            Toast.makeText(this,"用户已存在！",Toast.LENGTH_LONG).show()
+            false
+        } else {
+            insert.insertData(userId,userPhone,userPwd)
+            Toast.makeText(this,"注册成功！",Toast.LENGTH_LONG).show()
+            true
         }
     }
 

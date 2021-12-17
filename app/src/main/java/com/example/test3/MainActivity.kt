@@ -11,6 +11,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
+        val dbHelper = MyDatabaseHelper(this,"UserStore.db",1)
+        dbHelper. writableDatabase
+
         toLogin.setOnClickListener{
             val intent = Intent(this,Login::class.java)
             startActivity(intent)

@@ -1,5 +1,6 @@
 package com.example.test3
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,14 @@ class Message : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message)
         supportActionBar?.hide()
+
+        retToFriList.setOnClickListener{
+            val intent = Intent(this, FriendList::class.java)
+            startActivity(intent)
+        }
+
+        val friend = intent.getStringExtra("friendName")
+        friendName.setText(friend)
 
         initMessage()
         val layoutManager = LinearLayoutManager(this)

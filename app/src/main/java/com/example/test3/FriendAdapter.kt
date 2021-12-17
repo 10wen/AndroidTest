@@ -1,19 +1,15 @@
 package com.example.test3
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 
-class UserAdapter(private val userList: List<User>) :
-    RecyclerView.Adapter<UserAdapter.ViewHolder>(){
+class FriendAdapter(private val friendList: List<Friend>) :
+    RecyclerView.Adapter<FriendAdapter.ViewHolder>(){
 
     private var itemClick: MyOnClickListener? = null
 //    private var userList: List<User>? = null
@@ -67,7 +63,7 @@ class UserAdapter(private val userList: List<User>) :
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val user = userList[position]
+        val user = friendList[position]
         holder.userImage.setImageResource(user.ImgId)
         holder.userName.text = user.Name
         holder.userPhone.text = user.Phone
@@ -77,7 +73,7 @@ class UserAdapter(private val userList: List<User>) :
         }
     }
 
-    override fun getItemCount() = userList.size
+    override fun getItemCount() = friendList.size
 
 //    提供set方法
     fun setMyOnClickListener(itemClick: MyOnClickListener) {

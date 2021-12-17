@@ -5,7 +5,7 @@ import java.util.regex.Pattern
 class CheckString {
 
     fun checkUserId(userId: String): Boolean {
-        val regExp = "^[a-zA-Z]\\w{5,15}\$"
+        val regExp = "^[a-zA-Z]\\w{4,15}\$"
         val p = Pattern.compile(regExp)
         val m = p.matcher(userId)
         return m.matches()

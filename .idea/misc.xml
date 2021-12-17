@@ -3,12 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/activity_bind_info.xml" value="0.11956521739130435" />
-        <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/activity_friend_list.xml" value="0.11956521739130435" />
-        <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/activity_login.xml" value="0.11956521739130435" />
+        <entry key="..\:/Android/Projects/Test3/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.27447916666666666" />
+        <entry key="..\:/Android/Projects/Test3/app/src/main/res/drawable/ic_launcher_background.xml" value="0.27447916666666666" />
+        <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/activity_bind_info.xml" value="0.264" />
+        <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/activity_friend_list.xml" value="0.1" />
+        <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/activity_main.xml" value="0.11956521739130435" />
+        <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/activity_message.xml" value="0.15081521739130435" />
+        <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/activity_register.xml" value="0.15081521739130435" />
+        <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/corners_bg.xml" value="0.14945652173913043" />
+        <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/friend_item.xml" value="0.15081521739130435" />
+        <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/message_left_item.xml" value="0.15081521739130435" />
+        <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/message_right_item.xml" value="0.15081521739130435" />
         <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/return_layout.xml" value="0.10764944275582573" />
         <entry key="..\:/Android/Projects/Test3/app/src/main/res/layout/selftitle_layout.xml" value="0.11956521739130435" />
+        <entry key="..\:/Android/Projects/Test3/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2856410256410256" />
       </map>
     </option>
   </component>
