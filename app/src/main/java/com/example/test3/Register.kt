@@ -45,6 +45,11 @@ class Register : AppCompatActivity() {
                 }
             }
         }
+
+        cancelRegister.setOnClickListener{
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+        }
     }
 
     //向数据库表userTable插入数据

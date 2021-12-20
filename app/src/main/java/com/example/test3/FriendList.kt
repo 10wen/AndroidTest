@@ -18,6 +18,11 @@ class FriendList : AppCompatActivity() {
         setContentView(R.layout.activity_friend_list)
         supportActionBar?.hide()
 
+        retToLogin.setOnClickListener{
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+        }
+
         initUsers()
         val layoutManager = LinearLayoutManager(this)
         friendRecycleView.layoutManager = layoutManager
@@ -35,7 +40,9 @@ class FriendList : AppCompatActivity() {
         })
 
         addFriendBtn.setOnClickListener{
-            Toast.makeText(this, "You clicked addFriend Button.",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "更多功能.",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MoreList::class.java)
+            startActivity(intent)
         }
     }
 

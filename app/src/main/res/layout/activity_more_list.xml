@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/white">
+
+        <Button
+            android:id="@+id/retToFriList"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:backgroundTintMode="add"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@mipmap/ret"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:text="更多功能"
+            tools:ignore="HardcodedText" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corners_bg"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <EditText
+            android:id="@+id/callPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:maxLength="16"
+            android:layout_weight="6"
+            android:hint="请输入电话号码"
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:padding="5dp"
+            android:importantForAutofill="no"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/makeCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:background="#96B97D"
+            android:layout_weight="1"
+            android:text="打电话"
+            tools:ignore="HardcodedText" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corners_bg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <EditText
+            android:id="@+id/webUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:inputType="textWebEditText"
+            android:maxLines="1"
+            android:maxLength="16"
+            android:layout_weight="6"
+            android:hint="请输入网址"
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:padding="5dp"
+            android:importantForAutofill="no"
+            tools:ignore="HardcodedText,TextFields" />
+
+        <Button
+            android:id="@+id/makeWeb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:background="#96B97D"
+            android:layout_weight="1"
+            android:text="浏览"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/phoneList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:background="#96B97D"
+        android:text="通讯录"
+        tools:ignore="HardcodedText,SpUsage" />
+
+
+
+
+</LinearLayout>
