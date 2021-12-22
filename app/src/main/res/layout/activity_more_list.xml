@@ -45,7 +45,7 @@
             android:layout_gravity="center"
             android:inputType="phone"
             android:maxLines="1"
-            android:maxLength="16"
+            android:maxLength="11"
             android:layout_weight="6"
             android:hint="请输入电话号码"
             android:layout_margin="10dp"
@@ -84,7 +84,6 @@
             android:layout_gravity="center"
             android:inputType="textWebEditText"
             android:maxLines="1"
-            android:maxLength="16"
             android:layout_weight="6"
             android:hint="请输入网址"
             android:layout_margin="10dp"
@@ -120,7 +119,7 @@
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:background="#96B97D"
-        android:text="通讯录"
+        android:text="手机通讯录"
         tools:ignore="HardcodedText,SpUsage" />
 
 

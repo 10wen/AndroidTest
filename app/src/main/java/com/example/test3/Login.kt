@@ -27,17 +27,9 @@ class Login : AppCompatActivity() {
             userPwd.setText(pwd)
             rememberPass.isChecked = true
         }
-
-        toRegister.setOnClickListener {
-            val intent = Intent(this, Register::class.java)
-            startActivity(intent)
-        }
-
         userLogin.setOnClickListener {
-
             val phone = userPhone.text.toString()
             val pwd = userPwd.text.toString()
-
             if (checkLogin(phone, pwd)) {
                 //查找数据库表userTable中用户信息是否存在
                 if (checkUser(phone, pwd)) {
@@ -66,6 +58,12 @@ class Login : AppCompatActivity() {
                 }
             }
         }
+
+        toRegister.setOnClickListener {
+            val intent = Intent(this, Register::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun checkUser(userPhone: String, userPwd: String): Boolean {
