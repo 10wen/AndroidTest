@@ -1,10 +1,15 @@
 package com.example.test3
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_bind_info.*
 
 class BindInfo : AppCompatActivity() {
@@ -58,11 +63,14 @@ class BindInfo : AppCompatActivity() {
             if (checkBindInfo(user_name,user_qq,user_email)) {
                 //更新数据库表userTable中用户的信息
                 val userPhone = intent.getStringExtra("userPhone")
-                updateUserInfo(userPhone,user_name,user_qq,user_email,
-                user_sex,user_city,user_school,user_address)
+                if(!checkEmailWhetherExist(user_qq,user_email)){
 
-                val intent = Intent(this,Login::class.java)
-                startActivity(intent)
+                    updateUserInfo(userPhone,user_name,user_qq,user_email,
+                        user_sex,user_city,user_school,user_address)
+
+                    val intent = Intent(this,Login::class.java)
+                    startActivity(intent)
+                }
             }else{
                 if (!check.checkUserName(user_name)) {
                     userName.error = "昵称错误"
@@ -74,6 +82,29 @@ class BindInfo : AppCompatActivity() {
                     userEmail.error = "邮箱错误"
                 }
             }
+        }
+    }
+
+    @SuppressLint("WrongViewCast")
+    private fun checkEmailWhetherExist(userQq: String, userEmail: String): Boolean {
+        val check = ServerForUserDB(this)
+        return when (check.checkEmailExist(userQq,userEmail)) {
+            true -> {
+                AlertDialog.Builder(this).apply {
+                    setTitle("绑定信息失败")
+                    setMessage("已有账号绑定该QQ账号或邮箱！")
+                    setCancelable(false)
+                    setPositiveButton("确定") { dialog, which ->
+                        val edit: EditText = findViewById(R.id.userEmail)
+                        edit.text.clear()
+                    }
+                    setNegativeButton("取消") { _, _ ->
+                    }
+                    show()
+                }
+                true
+            }
+            false -> false
         }
     }
 
@@ -94,6 +125,7 @@ class BindInfo : AppCompatActivity() {
         Toast.makeText(this,"绑定信息成功！",Toast.LENGTH_LONG).show()
     }
 
+    //检查输入合法性
     private fun checkBindInfo(userName: String, userQq: String, userEmail: String): Boolean {
         return if (!check.checkUserName(userName)) {
             false

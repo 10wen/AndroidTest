@@ -3,7 +3,9 @@ package com.example.test3
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_register.*
 
 class Register : AppCompatActivity() {
@@ -56,13 +58,44 @@ class Register : AppCompatActivity() {
     private fun insertUserData(userId: String, userPhone: String, userPwd: String): Boolean {
         val insert = ServerForUserDB(this)
         val code = insert.checkUser(userPhone,userPwd)
-        return if  (code in listOf(1,2)){
-            Toast.makeText(this,"用户已存在！",Toast.LENGTH_LONG).show()
-            false
-        } else {
-            insert.insertData(userId,userPhone,userPwd)
-            Toast.makeText(this,"注册成功！",Toast.LENGTH_LONG).show()
-            true
+        return when {
+            code in listOf(1,2) -> {  // 用户已经注册，提示注册失败
+    //            Toast.makeText(this,"用户已存在！",Toast.LENGTH_LONG).show()
+                AlertDialog.Builder(this).apply {
+                    setTitle("注册失败")
+                    setMessage("该用户已注册！")
+                    setCancelable(false)
+                    setPositiveButton("前往登录") { _, _ ->
+                        val intent = Intent(this@Register, Login::class.java)
+                        startActivity(intent)
+                    }
+                    setNegativeButton("取消") { _, _ ->
+                    }
+                    show()
+                }
+                false
+            }
+            insert.checkUserIdExist(userId) -> {
+                //已有账号绑定该ID
+                AlertDialog.Builder(this).apply {
+                    setTitle("注册失败")
+                    setMessage("用户名已存在！")
+                    setCancelable(false)
+                    setPositiveButton("确认") { _, _ ->
+                        val edit: EditText = findViewById(R.id.userId)
+                        edit.text.clear()
+                    }
+                    setNegativeButton("取消") { _, _ ->
+                    }
+                    show()
+                }
+                false
+            }
+            else -> {  //注册账号成功
+                insert.insertData(userId,userPhone,userPwd)
+                Toast.makeText(this,"注册成功！",Toast.LENGTH_LONG).show()
+                true
+            }
         }
     }
 
@@ -74,6 +107,5 @@ class Register : AppCompatActivity() {
         }else if (!check.checkPassword(userPwd)){
             false
         }else  (userPwd == userPwd2)
-
     }
 }

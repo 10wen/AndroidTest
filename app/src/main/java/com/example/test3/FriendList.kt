@@ -64,7 +64,7 @@ class FriendList : AppCompatActivity() {
         userList.add(Friend("friend","19215120448", R.drawable.img_14))
         userList.add(Friend("friend","19215120449", R.drawable.img_15))
         userList.add(Friend("friend","19215120450", R.drawable.img_16))
-        userList.add(Friend("friend","19215120451", R.drawable.img_17))
+
         userList.add(Friend("friend","19215120452", R.drawable.img_18))
         userList.add(Friend("friend","19215120453", R.drawable.img_19))
         userList.add(Friend("friend","19215120454", R.drawable.img_20))

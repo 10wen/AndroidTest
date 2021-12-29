@@ -64,4 +64,35 @@ class ServerForUserDB(val context: Context) {
         }
         db.update("userTable", values, "userPhone= ?", arrayOf(userPhone))
     }
+
+    //查询Id是否已有账号使用
+    @SuppressLint("Range")
+    fun checkUserIdExist(userId: String) : Boolean {
+        val cursor = db.query("userTable", arrayOf("userId"),
+            null, null,null,null,null)
+        if (cursor.moveToFirst()) {
+            val id = cursor.getString(cursor.getColumnIndex("userId"))
+            if (id == userId) {
+                return true
+            }
+            cursor.close()
+        }
+        return false
+    }
+
+    //查询QQ、Email是否已被绑定
+    @SuppressLint("Range")
+    fun checkEmailExist(userQq: String, userEmail: String) : Boolean {
+        val cursor = db.query("userTable", arrayOf("userQq","userEmail"),
+            null, null,null,null,null)
+        if (cursor.moveToFirst()) {
+            val email = cursor.getString(cursor.getColumnIndex("userEmail"))
+            val qq = cursor.getString(cursor.getColumnIndex("userQq"))
+            if (email == userEmail || qq == userQq) {
+                return true
+            }
+            cursor.close()
+        }
+        return false
+    }
 }

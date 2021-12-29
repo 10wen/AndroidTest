@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_login.*
 
 class Login : AppCompatActivity() {
@@ -17,8 +18,9 @@ class Login : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
 
+        //利用sharePreferences实现记住账号密码
         val prefs = getPreferences(Context.MODE_PRIVATE)
-        val isRemember = prefs.getBoolean("remember_password", false)
+        val isRemember = prefs.getBoolean("remember_password", false) //默认未选中
         if (isRemember) {
             //将账号密码设置到文本框
             val phone = prefs.getString("phone","")
@@ -31,19 +33,19 @@ class Login : AppCompatActivity() {
             val phone = userPhone.text.toString()
             val pwd = userPwd.text.toString()
             if (checkLogin(phone, pwd)) {
-                //查找数据库表userTable中用户信息是否存在
-                if (checkUser(phone, pwd)) {
+                if (checkUser(phone, pwd)) { //查找数据库表userTable中用户信息是否存在
                     //实现记住账号密码
                     val editor = prefs.edit()
-                    if (rememberPass.isChecked) {
+                    if (rememberPass.isChecked) {  //再次判断是否选中记住账号密码
                         editor.putBoolean("remember_password", true)
                         editor.putString("phone",phone)
                         editor.putString("pwd",pwd)
                     } else {
-                        editor.clear()
+                        editor.clear()  //清空sharePreferences存储的内容
                     }
                     editor.apply()
 
+                    //输入合法，数据库表有用户信息，且账号密码正确则登录成功
                     val intent = Intent(this, FriendList::class.java)
                     startActivity(intent)
                     Toast.makeText(this,"登录成功！", Toast.LENGTH_LONG).show()
@@ -71,7 +73,19 @@ class Login : AppCompatActivity() {
         val select = ServerForUserDB(this)
         return when (select.checkUser(userPhone, userPwd)) {
             0 -> {
-                Toast.makeText(this, "用户不存在！",Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, "用户不存在！",Toast.LENGTH_LONG).show()
+                AlertDialog.Builder(this).apply {
+                    setTitle("登录失败")
+                    setMessage("用户不存在！")
+                    setCancelable(false)
+                    setPositiveButton("前往注册") { dialog, which ->
+                        val intent = Intent(this@Login, Register::class.java)
+                        startActivity(intent)
+                    }
+                    setNegativeButton("取消") { dialog, which ->
+                    }
+                    show()
+                }
                 false
             }
             1 -> {
@@ -84,6 +98,7 @@ class Login : AppCompatActivity() {
         }
     }
 
+    //先进行字符输入的合法性，合法返回true
     private fun checkLogin(userPhone: String, userPwd: String): Boolean {
         return if (!check.checkPhoneNum(userPhone)) {
             false
