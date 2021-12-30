@@ -107,6 +107,20 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/weatherBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:background="#96B97D"
+        android:text="天气状况"
+        tools:ignore="HardcodedText,SpUsage" />
+
 
     <Button
         android:id="@+id/phoneList"

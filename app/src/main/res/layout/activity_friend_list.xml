@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F2F3EF">
 
        <RelativeLayout
            android:layout_width="match_parent"
            android:layout_height="50dp"
-           android:backgroundTint="@color/white">
+           android:background="@color/white">
 
            <Button
-               android:id="@+id/retToLogin"
+               android:id="@+id/drawer"
                android:layout_width="30dp"
                android:layout_height="30dp"
-               android:backgroundTintMode="add"
                android:layout_centerVertical="true"
                android:layout_marginLeft="10dp"
-               android:background="@mipmap/ret"/>
+               android:background="@mipmap/more"
+               android:backgroundTintMode="add" />
 
            <TextView
                android:layout_width="wrap_content"
@@ -26,28 +33,50 @@
                android:layout_centerInParent="true"
                android:textColor="@color/black"
                android:textSize="20dp"
-               android:text="通讯录"
+               android:text="好友"
                tools:ignore="HardcodedText,SpUsage" />
 
            <Button
-               android:id="@+id/addFriendBtn"
+               android:id="@+id/weatherBtn"
                android:layout_width="40dp"
                android:layout_height="40dp"
+               android:layout_alignParentRight="true"
                android:layout_centerVertical="true"
                android:layout_marginRight="10dp"
+               android:background="@mipmap/weather_icon"
                android:backgroundTintMode="add"
-               android:layout_alignParentRight="true"
-               android:background="@mipmap/more"
                tools:ignore="RtlHardcoded" />
 
 
        </RelativeLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/friendRecycleView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/friendRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@mipmap/add"/>
+
+
+    </LinearLayout>
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu"
+        app:headerLayout="@layout/nav_header"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>
 
 
-</LinearLayout>

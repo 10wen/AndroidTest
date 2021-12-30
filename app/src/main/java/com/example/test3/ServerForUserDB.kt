@@ -95,4 +95,28 @@ class ServerForUserDB(val context: Context) {
         }
         return false
     }
+
+    //查询用户ID
+    @SuppressLint("Range")
+    fun selectUserId(userPhone: String) : String?{
+        val cursor = db.query("userTable", arrayOf("userId"),
+            "userPhone= ?", arrayOf(userPhone),null,null,null)
+        if (cursor.moveToFirst()) {
+            return cursor.getString(cursor.getColumnIndex("userId"))
+            cursor.close()
+        }
+        return null
+    }
+
+    //查询用户Email
+    @SuppressLint("Range")
+    fun selectUserEmail(userPhone: String) : String?{
+        val cursor = db.query("userTable", arrayOf("userEmail"),
+            "userPhone= ?", arrayOf(userPhone),null,null,null)
+        if (cursor.moveToFirst()) {
+            return cursor.getString(cursor.getColumnIndex("userEmail"))
+            cursor.close()
+        }
+        return null
+    }
 }

@@ -17,6 +17,9 @@ class Register : AppCompatActivity() {
         setContentView(R.layout.activity_register)
         supportActionBar?.hide()
 
+        //将当前Activity添加进Activity数组
+        ActivityCollector.addActivity(this)
+
         userRegister.setOnClickListener{
 
             val user_Id = userId.text.toString()

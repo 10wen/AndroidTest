@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_more_list.*
-import java.util.jar.Manifest
+
 
 class MoreList : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,10 +17,7 @@ class MoreList : AppCompatActivity() {
         setContentView(R.layout.activity_more_list)
         supportActionBar?.hide()
 
-        retToFriList.setOnClickListener{
-            val intent = Intent(this, FriendList::class.java)
-            startActivity(intent)
-        }
+
 
         makeCall.setOnClickListener{
             if (ContextCompat.checkSelfPermission(this,
@@ -32,13 +29,6 @@ class MoreList : AppCompatActivity() {
             }
         }
 
-        makeWeb.setOnClickListener{
-            val url = webUrl.text.toString()
-            val intent = Intent(this, WebViewActivity::class.java)
-            intent.putExtra("urlData", url)
-            startActivity(intent)
-        }
-
 
         phoneList.setOnClickListener{
             val intent = Intent(this, FriendBook::class.java)
@@ -46,6 +36,8 @@ class MoreList : AppCompatActivity() {
         }
 
     }
+
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

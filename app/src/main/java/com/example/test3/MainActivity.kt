@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
+        //将当前Activity添加进Activity数组
+        ActivityCollector.addActivity(this)
 
         //创建数据库
         val dbHelper = MyDatabaseHelper(this,"UserStore.db",1)

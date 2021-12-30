@@ -11,7 +11,7 @@
         android:backgroundTint="@color/white">
 
         <Button
-            android:id="@+id/retToMoreList"
+            android:id="@+id/retToFriendBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:backgroundTintMode="add"

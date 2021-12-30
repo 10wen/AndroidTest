@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_friend_book.*
-import kotlinx.android.synthetic.main.activity_friend_book.retToMoreList
 import kotlinx.android.synthetic.main.activity_web_view.*
 
 class FriendBook : AppCompatActivity() {
@@ -24,6 +23,8 @@ class FriendBook : AppCompatActivity() {
         setContentView(R.layout.activity_friend_book)
         supportActionBar?.hide()
 
+        ActivityCollector.addActivity(this)
+
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, contactsList)
         contactsView.adapter = adapter
         if (ContextCompat.checkSelfPermission(this,
@@ -34,8 +35,8 @@ class FriendBook : AppCompatActivity() {
             readContacts()
         }
 
-        retToMoreList.setOnClickListener{
-            val intent = Intent(this, MoreList::class.java)
+        retToFriendBtn.setOnClickListener{
+            val intent = Intent(this, FriendList::class.java)
             startActivity(intent)
         }
 

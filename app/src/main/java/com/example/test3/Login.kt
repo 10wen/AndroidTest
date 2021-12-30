@@ -18,6 +18,9 @@ class Login : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
 
+        //将当前Activity添加进Activity数组
+        ActivityCollector.addActivity(this)
+
         //利用sharePreferences实现记住账号密码
         val prefs = getPreferences(Context.MODE_PRIVATE)
         val isRemember = prefs.getBoolean("remember_password", false) //默认未选中
@@ -47,6 +50,7 @@ class Login : AppCompatActivity() {
 
                     //输入合法，数据库表有用户信息，且账号密码正确则登录成功
                     val intent = Intent(this, FriendList::class.java)
+                    intent.putExtra("userPhone",phone)//传递用户信息
                     startActivity(intent)
                     Toast.makeText(this,"登录成功！", Toast.LENGTH_LONG).show()
                     finish()

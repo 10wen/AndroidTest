@@ -21,6 +21,9 @@ class BindInfo : AppCompatActivity() {
         setContentView(R.layout.activity_bind_info)
         supportActionBar?.hide()
 
+        //将当前Activity添加进Activity数组
+        ActivityCollector.addActivity(this)
+
         val cityData = listOf(
             "济南", "石家庄", "长春", "哈尔滨", "沈阳", "呼和浩特", "乌鲁木齐", "兰州", "银川",
             "太原", "西安", "郑州", "合肥", "南京", "杭州", "福州", "广州", "南昌", "海口",

@@ -18,6 +18,8 @@ class Message : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_message)
         supportActionBar?.hide()
 
+        ActivityCollector.addActivity(this)
+
         retToFriList.setOnClickListener{
             val intent = Intent(this, FriendList::class.java)
             startActivity(intent)
