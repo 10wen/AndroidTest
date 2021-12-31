@@ -194,17 +194,17 @@
             android:padding="5dp"/>
 
         <AutoCompleteTextView
+            android:id="@+id/userSchool"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:hint="请填写学校名称"
+            android:inputType="text"
             android:maxLength="50"
             android:maxLines="1"
-            android:inputType="text"
-            android:layout_margin="5dp"
-            android:textSize="20dp"
             android:padding="5dp"
             android:textColor="@color/black"
-            android:id="@+id/userSchool"/>
+            android:textSize="20dp" />
 
     </LinearLayout>
 

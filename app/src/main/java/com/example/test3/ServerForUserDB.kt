@@ -12,7 +12,7 @@ class ServerForUserDB(val context: Context) {
     //判断userTable是否存在该用户
     @SuppressLint("Range")
     fun checkUser(phone: String, password: String) : Int {
-        var code = 0
+        var code = 0  //不存在用户
         val cursor = db.query("userTable", arrayOf("userPhone","userPwd"),
             "userPhone= ?", arrayOf(phone),null,null,null)
         if (cursor.moveToFirst()) {
@@ -82,7 +82,7 @@ class ServerForUserDB(val context: Context) {
 
     //查询QQ、Email是否已被绑定
     @SuppressLint("Range")
-    fun checkEmailExist(userQq: String, userEmail: String) : Boolean {
+    fun checkBindExist(userQq: String, userEmail: String) : Boolean {
         val cursor = db.query("userTable", arrayOf("userQq","userEmail"),
             null, null,null,null,null)
         if (cursor.moveToFirst()) {

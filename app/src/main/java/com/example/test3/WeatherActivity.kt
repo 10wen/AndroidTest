@@ -27,12 +27,13 @@ class WeatherActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //利用OkHttp回调的实现方式网络请求
         val address = "http://wthrcdn.etouch.cn/weather_mini?city=%E4%BD%9B%E5%B1%B1"
         HttpRequest.sendOkHttpRequest(address, object: Callback {
             override fun onResponse(call: Call, response: Response) {
                 //得到服务器返回的具体内容
                 val responseData = response.body?.string()
-                parseJSONWithJSONObject(responseData)
+                parseJSONWithJSONObject(responseData)  //JSONObject解析json数据
             }
             override fun onFailure(call: Call, e: IOException) {
                 //在这里对异常情况进行处理
@@ -50,20 +51,20 @@ class WeatherActivity : AppCompatActivity() {
             val dataObject = jsonObject.getJSONObject("data")
             val forecastString = dataObject.getString("forecast")
             val forecastArrayObject = JSONArray(forecastString)
-            val todayObject = forecastArrayObject.getJSONObject(0)
-            val tomorrowObject = forecastArrayObject.getJSONObject(1)
+            val todayObject = forecastArrayObject.getJSONObject(0)  //获取今天数据对象
+            val tomorrowObject = forecastArrayObject.getJSONObject(1) //获取明天数据对象
 
-            val day_today = todayObject.getString("date")
-            val today_low = todayObject.getString("low")
-            val today_high = todayObject.getString("high")
+            val day_today = todayObject.getString("date") //时间
+            val today_low = todayObject.getString("low") //最低温度
+            val today_high = todayObject.getString("high") //最高温度
             val day_tomorrow = todayObject.getString("date")
             val tomorrow_low = tomorrowObject.getString("low")
             val tomorrow_high = tomorrowObject.getString("high")
 
-            val ganmaoTip = dataObject.getString("ganmao")
-            val wendu = dataObject.getString("wendu")
+            val ganmaoTip = dataObject.getString("ganmao")  //提示语
+            val wendu = dataObject.getString("wendu")  //当前气温
 
-
+            //切换到主线程进行UI操作
             runOnUiThread {
                 today.text = day_today
                 todayLow.text = today_low

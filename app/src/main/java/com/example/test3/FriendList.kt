@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_friend_list.*
 import kotlinx.android.synthetic.main.activity_friend_list.weatherBtn
-import kotlinx.android.synthetic.main.activity_more_list.*
 import kotlinx.android.synthetic.main.nav_header.*
 
 class FriendList : AppCompatActivity() {
@@ -33,11 +32,13 @@ class FriendList : AppCompatActivity() {
 
         ActivityCollector.addActivity(this)
 
+        // 左滑动菜单的读取数据库中用户Id与邮箱
         val userPhone = intent.getStringExtra("userPhone")
         val select = ServerForUserDB(this)
         val userId = select.selectUserId(userPhone!!)
         val userEmail = select.selectUserEmail(userPhone!!)
 
+        //获取滑动菜单TextView的id号
         val navigationView = findViewById<NavigationView>(R.id.navView)
         val headerLayout = navigationView.getHeaderView(0)
         val userIdText = headerLayout.findViewById<TextView>(R.id.userText)
@@ -45,10 +46,16 @@ class FriendList : AppCompatActivity() {
         userIdText.text = userId
         userMailText.text = userEmail
 
-        navView.setCheckedItem(R.id.navCall)
+        // 打开滑动窗菜单
+        drawer.setOnClickListener{
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+        //事件处理
+        navView.setCheckedItem(R.id.navCall)  //默认选中打电话按钮
         navView.setNavigationItemSelectedListener {
-            Log.d("MenuItem:","$it")
-            when (it.itemId) {
+//            Log.d("MenuItem:","$it")
+            when (it.itemId) { // 获取事件 id
                 R.id.navCall -> makeCallFun()
                 R.id.navFriend -> openFriendBook()
                 R.id.navLoad -> startWebActivity()
@@ -57,12 +64,8 @@ class FriendList : AppCompatActivity() {
                                             Toast.LENGTH_SHORT).show()
             }
 
-            drawerLayout.closeDrawers()
+            drawerLayout.closeDrawers()  //关闭滑窗
             true
-        }
-
-        drawer.setOnClickListener{
-            drawerLayout.openDrawer(GravityCompat.START)
         }
 
         initUsers()
@@ -71,6 +74,7 @@ class FriendList : AppCompatActivity() {
         val adapter = FriendAdapter(userList)
         friendRecycleView.adapter = adapter
 
+        //实现RecyclerView事件监听接口
         adapter.setMyOnClickListener(object : FriendAdapter.MyOnClickListener{
             override fun clickListener(position: Int) {
                 Toast.makeText(content, "You click ${userList[position].Name}.",
@@ -81,6 +85,7 @@ class FriendList : AppCompatActivity() {
             }
         })
 
+        //跳转天气预报Activity
         weatherBtn.setOnClickListener{
             Toast.makeText(this, "天气预报.",Toast.LENGTH_SHORT).show()
             val intent = Intent(this, WeatherActivity::class.java)

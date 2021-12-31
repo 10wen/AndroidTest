@@ -26,9 +26,9 @@ class Message : AppCompatActivity(), View.OnClickListener {
         }
 
         val friend = intent.getStringExtra("friendName")
-        friendName.setText(friend)
+        friendName.text = friend
 
-        initMessage()
+        initMessage()  //RecycleView初始化聊天界面信息
         val layoutManager = LinearLayoutManager(this)
         messageRecycleView.layoutManager = layoutManager
         adapter = MessageAdapter(messageList)
@@ -44,16 +44,17 @@ class Message : AppCompatActivity(), View.OnClickListener {
                 val content = inputText.text.toString()
                 if (content.isNotEmpty()) {
                     val msg = Msg(content,Msg.TYPE_SEND)
-                    messageList.add(msg)
+                    messageList.add(msg)  //添加进消息类数组
                     adapter?.notifyItemInserted(messageList.size - 1)
-                    messageRecycleView.scrollToPosition(messageList.size - 1)
-                    inputText.setText("")
+                    messageRecycleView.scrollToPosition(messageList.size - 1)  //定位到末尾行
+                    inputText.setText("")  //清空输入框
                 }
             }
 
         }
     }
 
+    //初始化聊天信息界面内容
     private fun initMessage() {
         val msg1 = Msg("Hello guy.", Msg.TYPE_RECEIVED)
         messageList.add(msg1)

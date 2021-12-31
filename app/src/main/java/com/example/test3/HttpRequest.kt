@@ -6,13 +6,13 @@ import okhttp3.Request
 
 object HttpRequest {
 
-    //OkHttp发起网络请求
+    //OkHttp发起网络请求，回调机制
     fun sendOkHttpRequest(address: String, callback: okhttp3.Callback) {
         val client = OkHttpClient()
         val request = Request.Builder()
             .url(address)
             .build()
-        client.newCall(request).enqueue(callback)
+        client.newCall(request).enqueue(callback) //这里开启子线程，结果返回到Callback的onResponse方法
     }
 //    调用方法：
 //    HttpUtil.sendOkHttpRequest(address, object: Callback {

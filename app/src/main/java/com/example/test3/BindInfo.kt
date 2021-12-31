@@ -63,19 +63,18 @@ class BindInfo : AppCompatActivity() {
             val user_school = userSchool.text.toString()
             val user_address = userAddress.text.toString()
 
-            if (checkBindInfo(user_name,user_qq,user_email)) {
-                //更新数据库表userTable中用户的信息
-                val userPhone = intent.getStringExtra("userPhone")
-                if(!checkEmailWhetherExist(user_qq,user_email)){
+            if (checkBindInfo(user_name,user_qq,user_email)) {  //先检查输入合法性
 
+                val userPhone = intent.getStringExtra("userPhone")  //获取主键手机号
+                if(!checkBindWhetherExist(user_qq,user_email)){  //再检查qq与邮箱是否已经被绑定
+                    //更新数据库表userTable中用户的信息
                     updateUserInfo(userPhone,user_name,user_qq,user_email,
                         user_sex,user_city,user_school,user_address)
-
-                    val intent = Intent(this,Login::class.java)
+                    val intent = Intent(this,Login::class.java) //跳转登录
                     startActivity(intent)
                 }
             }else{
-                if (!check.checkUserName(user_name)) {
+                if (!check.checkUserName(user_name)) {  // 定位哪一项信息输入不合法
                     userName.error = "昵称错误"
                 }
                 if (!check.checkUserQq(user_qq)) {
@@ -89,17 +88,17 @@ class BindInfo : AppCompatActivity() {
     }
 
     @SuppressLint("WrongViewCast")
-    private fun checkEmailWhetherExist(userQq: String, userEmail: String): Boolean {
+    private fun checkBindWhetherExist(userQq: String, userEmail: String): Boolean {
         val check = ServerForUserDB(this)
-        return when (check.checkEmailExist(userQq,userEmail)) {
-            true -> {
+        return when (check.checkBindExist(userQq,userEmail)) {
+            true -> {   //弹出提示框
                 AlertDialog.Builder(this).apply {
                     setTitle("绑定信息失败")
                     setMessage("已有账号绑定该QQ账号或邮箱！")
                     setCancelable(false)
                     setPositiveButton("确定") { dialog, which ->
                         val edit: EditText = findViewById(R.id.userEmail)
-                        edit.text.clear()
+                        edit.text.clear()   //清空输入框
                     }
                     setNegativeButton("取消") { _, _ ->
                     }

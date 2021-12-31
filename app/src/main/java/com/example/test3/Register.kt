@@ -27,11 +27,11 @@ class Register : AppCompatActivity() {
             val user_pwd = userPwd.text.toString()
             val user_pwd2 = userPwd2.text.toString()
 
-            if (checkRegister(user_Id,user_Phone,user_pwd,user_pwd2)) {
+            if (checkRegister(user_Id,user_Phone,user_pwd,user_pwd2)) {  //检查合法性
                 //向数据库表userTable插入数据
-                if (insertUserData(user_Id,user_Phone,user_pwd)){
+                if (insertUserData(user_Id,user_Phone,user_pwd)){  //查询数据库表是否存在用户，返回添加用户是否成功
                     val intent = Intent(this, BindInfo::class.java)
-                    intent.putExtra("userPhone", user_Phone)
+                    intent.putExtra("userPhone", user_Phone)  //向绑定信息页面传递用户手机号
                     startActivity(intent)
                 }
             }else{
@@ -51,6 +51,7 @@ class Register : AppCompatActivity() {
             }
         }
 
+        //取消注册
         cancelRegister.setOnClickListener{
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
